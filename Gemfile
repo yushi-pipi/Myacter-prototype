@@ -3,7 +3,8 @@
 source 'https://rubygems.org'
 
 gem 'bcrypt', '3.1.12'
-gem 'bootstrap-sass', '3.3.7'
+#gem 'bootstrap-sass', '3.3.7'
+gem 'bootstrap', '~> 4.3.1'
 gem 'coffee-rails', '4.2.2'
 gem 'jbuilder',     '2.7.0'
 gem 'jquery-rails', '4.3.1'
@@ -34,6 +35,7 @@ group :test do
   gem 'minitest',                 '5.10.3'
   gem 'minitest-reporters',       '1.1.14'
   gem 'rails-controller-testing', '1.0.2'
+  gem 'rspec-rails'
 end
 
 group :production do

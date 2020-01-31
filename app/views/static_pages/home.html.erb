@@ -1,17 +1,40 @@
-<div class="center jumbotron">
-  <h1>Welcome to the Sample App</h1>
-
-  <h2>
-    This is the home page for the
-    <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
-    sample application.
-  </h2>
-
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">アクティビティを記録しよう</h1>
+    <p>MyActer（My Activityｍeter）は日々の活動を記録します。</p>
+    <p>活動記録をフォロワーと共有できます。</p>
+    <p>活動記録から自己分析が可能です。</p>
+    <%= link_to "はじめる", signup_path, class: "btn btn-info btn-lg" %>
+  </div>
 </div>
 
-<%= link_to image_tag("rails.png", alt: "Rails logo"),
-            'http://rubyonrails.org/' %>
-
-<!--<%= link_to image_tag("kitten.png", alt: "kitten logo"),
-                        'cdn.learnenough.com/kitten.png' %>-->
+<div class="container">
+  <div class="container discription-container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="discription-img-container">
+          <%= image_tag 'pen.png', class: 'discription-img' %>
+        </div>
+        <h2>活動の記録</h2>
+        <p>活動時間を計測し内容をメモします。開始時間、終了時間、経過時間をそれぞれ記録はタイマー機能を用いて正確に記録することができます。
+          活動内容を入力するだけで活動記録を行えます。</p>
+      </div>
+      <div class="col-md-4">
+        <div class="discription-img-container">
+          <%= image_tag 'com.png', class: 'discription-img' %>
+        </div>
+        <h2>活動の共有</h2>
+        <p>お互いに活動をフォロワーと共有することができます。これよって知識の広がり、モチベーションの向上を図ります。
+          またTwitterと連携し、少し凝った「今日の積み立て」ツイートが行えます。
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div class="discription-img-container">
+          <%= image_tag 'graph.png', class: 'discription-img' %>
+        </div>
+        <h2>活動の見える化</h2>
+        <p>活動記録はログを残すことが可能です。活動のカテゴリ単位で累計での活動量を可視化できます。また、グラフ化を行う事で日々の活動の自己分析が可能です</p>
+      </div>
+    </div>
+  </div>
+</div>

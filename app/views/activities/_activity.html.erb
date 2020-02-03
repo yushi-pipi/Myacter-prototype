@@ -1,0 +1,13 @@
+<li id="activity-<%= activity.id %>">
+    <%= link_to gravatar_for(activity.user, size: 50), activity.user %>
+    <p class="user"><%= link_to activity.user.name, activity.user %></p>
+    <p class="title"><%= activity.title %></p>
+    <p class="category"><%= activity.category %></p>
+    <p class="timestamp">
+      Posted <%= time_ago_in_words(activity.created_at) %> ago.
+      <% if current_user?(activity.user) %>
+      <%= link_to "delete", activity, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    　<% end %>
+    </p>
+  </li>

@@ -1,3 +1,19 @@
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="activity_form">
+        <%= render 'shared/activity_form' %>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <h3>Activity Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
+  </div>
+<% else %>
 <div class="jumbotron">
   <div class="container">
     <h1 class="display-3">アクティビティを記録しよう</h1>
@@ -38,3 +54,4 @@
     </div>
   </div>
 </div>
+<% end %>

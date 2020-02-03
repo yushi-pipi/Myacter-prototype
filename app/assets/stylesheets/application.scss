@@ -28,11 +28,8 @@ $gray-medium-light: #eaeaea;
 // header
 
 body {
-  background-color: $lantern-black;
+  padding-top: 70px;
   badge badge-{color:light};
-  h1,h2,h3,h4,p {
-    color: $lantern-light-white;
-  }
 }
 
 
@@ -44,12 +41,12 @@ body {
   h1 {
     font-size: 1.6rem;
     margin-bottom: 1.8rem;
-    color: $lantern-light-white;
+    color: white;
     }
     p {
       font-size: 1rem;
       line-height: 2.1rem;
-      color: $lantern-light-white;
+      color: white;
     }
 }
 
@@ -75,11 +72,13 @@ body {
   }
 }
 
+.activities li{
+  display: inline-block;
+  padding:  40px;             /* 余白指定 */
+}
+
 // discription
 
-.discription-container h2, .discription-container p {
-  color: $lantern-light-white;
-}
 
 .discription-container {
   margin: 3rem 0;
@@ -108,9 +107,59 @@ body {
 
 .login-container {
   width: 100%;
-  max-width: 330px;
   margin: auto;
   padding-top: 1rem !important;
 }
+
+
+/* microposts */
+
+.microposts {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .user {
+    margin-top: 5em;
+    padding-top: 0;
+  }
+  .content {
+    display: block;
+    margin-left: 60px;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
+
+  .gravatar {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+}
+
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+
+span.picture {
+  margin-top: 10px;
+  input {
+    border: 0;
+  }
+}
+
+// home
+.activitiy_create{
+  padding-left: 40px;
+}
+
+
 
 

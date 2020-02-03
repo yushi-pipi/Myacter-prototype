@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_many :activities, dependent: :destroy
+  has_many :microposts, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
   before_create :create_activation_digest
@@ -34,6 +36,7 @@ class User < ApplicationRecord
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?
+
     BCrypt::Password.new(digest).is_password?(token)
   end
 
@@ -44,8 +47,8 @@ class User < ApplicationRecord
 
   # アカウントを有効にする
   def activate
-    #update_attribute(:activated, true)
-    #update_attribute(:activated_at, Time.zone.now)
+    # update_attribute(:activated, true)
+    # update_attribute(:activated_at, Time.zone.now)
     update_columns(activated: true, activated_at: Time.zone.now)
   end
 
@@ -58,8 +61,8 @@ class User < ApplicationRecord
   def create_reset_digest
     self.reset_token = User.new_token
     update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
-    #update_attribute(:reset_digest, User.digest(reset_token))
-    #update_attribute(:reset_sent_at, Time.zone.now)
+    # update_attribute(:reset_digest, User.digest(reset_token))
+    # update_attribute(:reset_sent_at, Time.zone.now)
   end
 
   # パスワード再設定のメールを送信する
@@ -72,11 +75,15 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  def feed
+    Activity.where('user_id = ?', id)
+  end
+
   private
 
   # メールアドレスをすべて小文字にする
   def downcase_email
-    self.email.downcase!
+    email.downcase!
   end
 
   # 有効化トークンとダイジェストを作成および代入する

@@ -11,6 +11,7 @@ if Rails.env.production?
       path_style: true
     }
     config.fog_directory = ENV['myacterstrage']
+    config.cache_storage = :fog
   end
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
 end

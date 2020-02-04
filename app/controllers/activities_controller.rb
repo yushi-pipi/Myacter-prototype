@@ -24,7 +24,7 @@ class ActivitiesController < ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:title, :category)
+    params.require(:activity).permit(:title, :category, :picture)
   end
 
   def correct_user

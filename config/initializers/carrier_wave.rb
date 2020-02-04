@@ -1,12 +1,8 @@
 # frozen_string_literal: true
-require 'carrierwave/storage/abstract'
-require 'carrierwave/storage/file'
-require 'carrierwave/storage/fog'
 
 if Rails.env.production?
   CarrierWave.configure do |config|
-    config.storage :fog
-    config.fog_provider = 'fog/aws'
+    config.fog_provider = 'fog'
     config.fog_credentials = {
       provider: 'AWS',
       region: ENV['S3_REGION'],

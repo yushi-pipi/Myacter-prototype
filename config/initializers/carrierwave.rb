@@ -7,11 +7,10 @@ if Rails.env.production?
       provider: 'AWS',
       region: ENV['ap-northeast-1'],
       aws_access_key_id: ENV['S3_ACCESS_KEY'],
-      aws_secret_access_key: ENV['S3_SECRET_KEY']
+      aws_secret_access_key: ENV['S3_SECRET_KEY'],
       path_style: true
     }
     config.fog_directory = ENV['myacterstrage']
   end
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
 end
-

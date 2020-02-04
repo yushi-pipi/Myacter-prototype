@@ -2,7 +2,7 @@
 
 if Rails.env.production?
   CarrierWave.configure do |config|
-    config.fog_provider = 'fog'
+    config.fog_provider = 'fog/awsß'
     config.fog_credentials = {
       provider: 'AWS',
       region: ENV['S3_REGION'],

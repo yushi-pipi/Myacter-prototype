@@ -10,8 +10,8 @@ if Rails.env.production?
     config.fog_credentials = {
       provider: 'AWS',
       region: ENV['ap-northeast-1'],
-      aws_access_key_id: ENV['S3_ACCESS_KEY'],
-      aws_secret_access_key: ENV['S3_SECRET_KEY'],
+      aws_access_key_id: ENV['AKIA3EX5LE5GWXEGG4FP'],
+      aws_secret_access_key: ENV['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'],
       path_style: true
     }
     config.fog_directory = ENV['myacterstrage']

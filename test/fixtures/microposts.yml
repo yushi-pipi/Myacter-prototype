@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  memo: MyText
+  start_at: 2020-02-10 00:13:32
+  finish_at: 2020-02-10 00:13:32
+  act_itvl: 2020-02-10 00:13:32
+  activity: one
+
+two:
+  memo: MyText
+  start_at: 2020-02-10 00:13:32
+  finish_at: 2020-02-10 00:13:32
+  act_itvl: 2020-02-10 00:13:32
+  activity: two

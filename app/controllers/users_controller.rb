@@ -13,8 +13,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @activities = @user.activities.paginate(page: params[:page])
-    @microposts = @user.microposts.paginate(page: params[:page])
-    # redirect_to(root_url) && return unless @user.activated?
+
+    @user_m = User.includes(activities: :microposts).find_by_id(params[:id])
+    @microposts = Kaminari.paginate_array(@user_m.activities.map(&:microposts).flatten).page(params[:page]).per(10)
   end
 
   def new
@@ -58,7 +59,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation)
   end
-
 
   # 正しいユーザーかどうか確認
   def correct_user

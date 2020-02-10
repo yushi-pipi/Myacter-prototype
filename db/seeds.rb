@@ -27,16 +27,15 @@ User.create!(name: 'Example User',
                activated_at: Time.zone.now)
 end
 
-users = User.order(:created_at).take(1)
-50.times do
+users = User.order(:created_at).take(5)
+5.times do
   title = 'title_test'
   category = 'category_test'
   users.each { |user| user.activities.create!(title: title, category: category) }
 end
 
-users = User.order(:created_at).take(6)
-50.times do
-  title = 'title_test'
-  category = Faker::Lorem.sentence(5)
-  users.each { |user| user.microposts.create!(title: title, category: category) }
+activities = Activity.order(:id).take(25)
+3.times do
+  memo = 'memo_test'
+  activities.each { |activity| activity.microposts.create!(memo: memo) }
 end

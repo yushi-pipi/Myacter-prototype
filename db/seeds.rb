@@ -28,8 +28,14 @@ User.create!(name: 'Example User',
 end
 
 users = User.order(:created_at).take(5)
-50.times do
+5.times do
   title = 'title_test'
   category = 'category_test'
   users.each { |user| user.activities.create!(title: title, category: category) }
+end
+
+activities = Activity.order(:id).take(25)
+3.times do
+  memo = 'memo_test'
+  activities.each { |activity| activity.microposts.create!(memo: memo) }
 end

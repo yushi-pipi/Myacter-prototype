@@ -18,8 +18,9 @@ gem 'carrierwave',             '1.2.2'
 gem 'mini_magick',             '4.7.0'
 gem 'will_paginate',           '3.1.6'
 gem 'bootstrap-will_paginate', '1.0.0'
+gem 'kaminari', '~> 1.1.1'
 gem 'fog'
-gem 'kaminari', '~> 0.17.0'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri

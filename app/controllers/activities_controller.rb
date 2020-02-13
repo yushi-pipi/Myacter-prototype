@@ -16,7 +16,7 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
-    @activitiy.destroy
+    @activity.destroy
     flash[:success] = 'Activity deleted'
     redirect_to request.referrer || root_url
   end
@@ -28,7 +28,7 @@ class ActivitiesController < ApplicationController
   end
 
   def correct_user
-    @activitiy = current_user.activities.find_by(id: params[:id])
-    redirect_to root_url if @activitiy.nil?
+    @activity = current_user.activities.find_by(id: params[:id])
+    redirect_to root_url if @activity.nil?
   end
 end

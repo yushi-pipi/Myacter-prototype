@@ -28,14 +28,28 @@ User.create!(name: 'Example User',
 end
 
 users = User.order(:created_at).take(5)
-5.times do
-  title = 'title_test'
-  category = 'category_test'
-  users.each { |user| user.activities.create!(title: title, category: category) }
-end
 
-activities = Activity.order(:id).take(25)
-3.times do
-  memo = 'memo_test'
-  activities.each { |activity| activity.microposts.create!(memo: memo) }
-end
+title = '学習全般'
+category = '学習'
+users.each { |user| user.activities.create!(title: title, category: category) }
+title = 'プログラミング全般'
+category = 'プログラミング'
+users.each { |user| user.activities.create!(title: title, category: category) }
+title = '読書全般'
+category = '読書'
+users.each { |user| user.activities.create!(title: title, category: category) }
+title = 'スポーツ全般'
+category = 'スポーツ'
+users.each { |user| user.activities.create!(title: title, category: category) }
+title = '音楽全般'
+category = '音楽'
+users.each { |user| user.activities.create!(title: title, category: category) }
+title = '芸術全般'
+category = '芸術'
+users.each { |user| user.activities.create!(title: title, category: category) }
+
+# activities = Activity.order(:id).take(25)
+# 3.times do
+#  memo = 'memo_test'
+#  activities.each { |activity| activity.microposts.create!(memo: memo) }
+# end

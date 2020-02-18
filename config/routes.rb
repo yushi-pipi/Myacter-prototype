@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   post '/signup', to: 'users#create'
   get '/activities/:id', to: 'microposts#start'
-  get '/microposts/:id', to: 'microposts#finish'
+  patch '/microposts/:id', to: 'microposts#finish'
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: %i[new create edit update]

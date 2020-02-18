@@ -2,18 +2,18 @@
 <div class="row mx-auto" style="width: 600px;">
   <aside class="col-md-12">
     <section class="user_info">
-                  <div class="timer" id="timer">0:00:00</div>
-                  <div><%= @activity.id %></a>
-                  <div><%= @micropost.id%></a>
-                  <div><%= @micropost.start_at%></a>
-                  <div><%= @micropost.finish_at%></a>
-                  <div><%= @micropost.activity_id%></a>
-    
-
-                <div class="center">
-                  <button type="button" class="btn btn-primary">
-                      <%= link_to "終了",@micropost,method: :get,action: :finish,class:"link-to"%></button>
-                </div>
-                <%= javascript_include_tag "timer" %>
+      <div class="timer" id="timer">0:00:00</div>
+      <%= form_for(@micropost) do |f| %>
+      <div class="field">
+        <%= f.text_area :memo, class: 'form-control', placeholder: "アクティビティに関するメモ" %>
+      </div>
+      <a><%= @activity.id %></a>
+      <a><%= @micropost.id%></a>
+      <a><%= @micropost.start_at%></a>
+      <a><%= @micropost.finish_at%></a>
+      <a><%= @micropost.memo%></a>
+      <%= f.submit "Post", class: "btn btn-primary" %>
+      <% end %>
+      <%= javascript_include_tag "timer" %>
     </section>
 </div>

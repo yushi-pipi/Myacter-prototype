@@ -1,15 +1,13 @@
 <%= form_for(@activity) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_field :title, class: 'form-control', placeholder: "Compose new activitytitle..." %>
+    <%= f.text_field :title, class: 'form-control', placeholder: "新しいアクティビティのタイトル" %>
   </div>
   <div class="form-group">
     <%= f.select :category, ['学習', 'プログラミング', '読書', 'スポーツ', '音楽', '芸術'], {include_blank: 'カテゴリ選択'}, class: 'sample' %>
+    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
   </div>
-  <%= f.submit "Post", class: "btn btn-primary" %>
-  <span class="picture">
-    <%= f.file_field :picture,class: "btn btn-primary", accept: 'image/jpeg,image/gif,image/png' %>
-  </span>
+  <%= f.submit "アクティビティの作成", class: "form-control btn-primary" %>
 <% end %>
 
 <script type="text/javascript">

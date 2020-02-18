@@ -4,16 +4,21 @@
     <p class="user"><%= link_to activity.user.name, activity.user %></p>-->
   <dt class="title">タイトル：　
     <a><%= activity.title %></a>
+    <a><%= activity.id %></a>
   </dt>
   <dt class="category">カテゴリ：　
-    <a>
-      <%= activity.category %></a>
+    <a><%= activity.category %></a>
   </dt>
   <dt class="timestamp">
     Posted <%= time_ago_in_words(activity.created_at) %> ago.
+  </dt>
+  <dt class=btns>
+    <button id="start" class="btn btn-primary mt-5" >
+      <%= link_to "記録する",activity,class:"link-to" %></button>
     <% if current_user?(activity.user) %>
-    <%= link_to "delete", activity, method: :delete,
-                                       data: { confirm: "You sure?" } %>
+    <button class="btn btn-primary mt-5"><%= link_to "削除", activity, method: :delete,class:"link-to",
+                                       data: { confirm: "You sure?" } %></button>
     　<% end %>
   </dt>
+
 </li>

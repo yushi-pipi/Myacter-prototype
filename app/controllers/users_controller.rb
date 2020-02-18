@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @activities = @user.activities.paginate(page: params[:page])
 
-    @user_m = User.includes(activities: :microposts).find_by_id(params[:id])
+    @user_m = User.includes(activities: :microposts).order('microposts.created_at DESC').find_by_id(params[:id])
     @microposts = Kaminari.paginate_array(@user_m.activities.map(&:microposts).flatten).page(params[:page]).per(10)
   end
 

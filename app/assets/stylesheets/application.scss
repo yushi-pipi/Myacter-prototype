@@ -32,12 +32,16 @@ body {
   badge badge-{color:light};
 }
 
+.link-to {
+  color: white;
+}
+
 
 
 .jumbotron {
-  background-image: url("book.jpg");
+  background-image: url("rain.jpg");
   background-size: cover;
-  background-position: center 60%;
+  background-position: center 50%;
   h1 {
     font-size: 1.6rem;
     margin-bottom: 1.8rem;
@@ -155,9 +159,23 @@ span.picture {
   }
 }
 
+.timer{
+  font-size: 10rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #ACB6E5;//非対応のブラウザでの文字色を設定
+    background: -webkit-linear-gradient(0deg, #ACB6E5, #86FDE8);//背景色にグラデーションを指定
+    -webkit-background-clip: text;//テキストでくり抜く
+    -webkit-text-fill-color: transparent;//くり抜いた部分は背景を表示
+}
+
 // home
-.activitiy_create{
-  padding-left: 40px;
+.activity_create{
+  padding-left: 50px;
+}
+
+.activity_category{
+  padding: 30px;
 }
 
 

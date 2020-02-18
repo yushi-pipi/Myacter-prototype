@@ -1,7 +1,5 @@
 <li id="activity-<%= activity.id %>">
   <%= image_tag activity.picture.url if activity.picture? %>
-  <!--<%= link_to gravatar_for(activity.user, size: 50), activity.user %>
-    <p class="user"><%= link_to activity.user.name, activity.user %></p>-->
   <dt class="title">タイトル：　
     <a><%= activity.title %></a>
     <a><%= activity.id %></a>
@@ -13,10 +11,10 @@
     Posted <%= time_ago_in_words(activity.created_at) %> ago.
   </dt>
   <dt class=btns>
-    <button id="start" class="btn btn-primary mt-5" >
+    <button id="start" class="btn btn-primary " >
       <%= link_to "記録する",activity,class:"link-to" %></button>
     <% if current_user?(activity.user) %>
-    <button class="btn btn-primary mt-5"><%= link_to "削除", activity, method: :delete,class:"link-to",
+    <button class="btn btn-primary "><%= link_to "削除", activity, method: :delete,class:"link-to",
                                        data: { confirm: "You sure?" } %></button>
     　<% end %>
   </dt>

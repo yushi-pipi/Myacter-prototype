@@ -12,6 +12,8 @@
  *
  */
  @import "bootstrap";
+ @import "bootstrap-social";
+ @import "font-awesome";
 
 
 /* mixins, variables, etc. */
@@ -25,15 +27,20 @@ $lantern-blue: #0071bc;
 $lantern-dark-blue: #0c2e64;
 $gray-medium-light: #eaeaea;
 
-// header
+//all
 
 body {
   padding-top: 70px;
+  padding-left: 20px;
   badge badge-{color:light};
 }
 
 .link-to {
   color: white;
+}
+
+.btn{
+  margin: 10px;
 }
 
 
@@ -171,11 +178,15 @@ span.picture {
 
 // home
 .activity_create{
-  padding-left: 50px;
+  padding-left: 70px;
 }
 
 .activity_category{
   padding: 30px;
+}
+
+.btns{
+  padding: -15px;
 }
 
 

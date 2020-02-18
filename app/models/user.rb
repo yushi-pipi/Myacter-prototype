@@ -7,12 +7,14 @@ class User < ApplicationRecord
   before_save :downcase_email
   before_create :create_activation_digest
   validates :name, presence: true, length: { maximum: 50 }
+  validates :username, presence: true, unless: :uid?
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
-  has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+                    uniqueness: { case_sensitive: false },
+                    unless: :uid?
+  has_secure_password validations: false
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true, unless: :uid?
 
   # 渡された文字列のハッシュ値を返す
   def self.digest(string)
@@ -79,11 +81,28 @@ class User < ApplicationRecord
     Activity.where('user_id = ?', id)
   end
 
+  # Twitterでのログイン認証   find_or_create_from_authだとエラーになるバージョンによる違い？
+  def self.find_or_create_from_auth_hash(auth_hash)
+    provider = auth_hash[:provider]
+    uid = auth_hash[:uid]
+    name = auth_hash[:info][:name]
+    topimage = auth_hash[:info][:image]
+
+    # find_or_create_by()は()の中の条件のものが見つければ取得し、なければ新しく作成
+    find_or_create_by(provider: provider, uid: uid) do |user|
+      user.name = name
+      user.topimage = topimage
+    end
+  end
+
   private
 
   # メールアドレスをすべて小文字にする
   def downcase_email
-    email.downcase!
+    if email.nil?
+    else
+      email.downcase!
+    end
   end
 
   # 有効化トークンとダイジェストを作成および代入する

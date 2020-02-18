@@ -21,6 +21,11 @@ gem 'bootstrap-will_paginate', '1.0.0'
 gem 'kaminari', '~> 1.1.1'
 gem 'fog'
 gem 'kaminari-bootstrap', '~> 3.0.1'
+gem 'dotenv-rails'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'bootstrap-social-rails'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri
@@ -32,6 +37,8 @@ group :development do
   gem 'spring',                '2.0.2'
   gem 'spring-watcher-listen', '2.0.1'
   gem 'web-console',           '3.5.1'
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :test do

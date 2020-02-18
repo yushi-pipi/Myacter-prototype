@@ -3,10 +3,10 @@
   <aside class="col-md-4 activity_create">
     <section class="user_info">
       <h1>
-        <% if @user.name.nil? %>
-        <%= gravatar_for @user %>
-        <% else %>
+        <% if @user.email.nil? %>
         <%= image_tag @user.topimage, class:"profile_img" %>
+        <% else %>
+        <%= gravatar_for @user %>
         <% end %>
       </h1>
       <h2><%= @user.name %></h2>

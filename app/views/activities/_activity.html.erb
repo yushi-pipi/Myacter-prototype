@@ -1,9 +1,9 @@
 <li id="activity-<%= activity.id %>">
   <div class="card">
+    <%= image_tag activity.picture.url,calss:"card-img-top" if activity.picture? %>
     <div class="card-header">
       <%= activity.title %>
     </div>
-    <%= image_tag activity.picture.url,calss:"card-img-top" if activity.picture? %>
     <div class="card-body">
       <p class="card-text"><%= activity.category %></p>
       <a class="timestamp">

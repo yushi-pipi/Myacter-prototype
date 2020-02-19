@@ -1,22 +1,22 @@
 <li id="activity-<%= activity.id %>">
-  <%= image_tag activity.picture.url if activity.picture? %>
-  <dt class="title">タイトル：　
-    <a><%= activity.title %></a>
-    <a><%= activity.id %></a>
-  </dt>
-  <dt class="category">カテゴリ：　
-    <a><%= activity.category %></a>
-  </dt>
-  <dt class="timestamp">
-    Posted <%= time_ago_in_words(activity.created_at) %> ago.
-  </dt>
-  <dt class=btns>
-    <button id="start" class="btn btn-primary " >
-      <%= link_to "記録する",activity,class:"link-to" %></button>
-    <% if current_user?(activity.user) %>
-    <button class="btn btn-primary "><%= link_to "削除", activity, method: :delete,class:"link-to",
-                                       data: { confirm: "You sure?" } %></button>
-    　<% end %>
-  </dt>
-
+  <div class="card">
+    <div class="card-header">
+      <%= activity.title %>
+    </div>
+    <%= image_tag activity.picture.url,calss:"card-img-top" if activity.picture? %>
+    <div class="card-body">
+      <p class="card-text"><%= activity.category %></p>
+      <a class="timestamp">
+        Posted <%= time_ago_in_words(activity.created_at) %> ago.
+      </a>
+    </div>
+    <div class="card-footer">
+      <button id="start" class="btn btn-primary " >
+        <%= link_to "記録する",activity,class:"link-to" %></button>
+      <% if current_user?(activity.user) %>
+      <button class="btn btn-primary "><%= link_to "削除", activity, method: :delete,class:"link-to",
+                                         data: { confirm: "You sure?" } %></button>
+      　<% end %>
+    </div>
+  </div>
 </li>

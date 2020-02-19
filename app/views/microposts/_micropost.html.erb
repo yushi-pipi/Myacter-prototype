@@ -1,10 +1,13 @@
 <li id="micropost-<%= micropost.id %>">
-    <span class="activity"><%= link_to micropost.activity.title, micropost.activity %></span>
-    <dt class="id"><%= micropost.id %></dt>
-    <dt class="memo"><%= micropost.memo %></dt>
-    <dt class="start_at"><%= micropost.start_at.strftime('%-H:%M:%S')%>~<%= micropost.finish_at.strftime('%-H:%M:%S') %></dt>
-    <dt class="int_at"><%= "#{micropost.act_itvl.strftime('%-Hh%-Mm%-Ss')}" %></dt>
-    <span class="timestamp">
-      Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-    </span>
-  </li>
+  <div class="row">
+    <div class="col-md-3 box13">
+      <dt class="activity"><%= link_to micropost.activity.title, micropost.activity %></dt>
+      <dt class="start_at"><%= micropost.start_at.strftime('%-H:%M')%>~<%= micropost.finish_at.strftime('%-H:%M') %>
+      </dt>
+      <dt class="int_at"><%= "#{micropost.act_itvl.strftime('%-Hh%-Mm%-Ss')}" %></dt>
+    </div>
+    <div class="col-md-5 box14">
+        <p class="memo"><%= micropost.memo %></p>
+    </div>
+  </div>
+</li>

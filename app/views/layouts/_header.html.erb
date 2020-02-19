@@ -9,7 +9,6 @@
       <div class="collapse navbar-collapse " id="Navber">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item"><%= link_to "Home",   root_path, :class => "nav-link" %></li>
-          <li class="nav-item"><%= link_to "Help",   help_path, :class => "nav-link" %></li>
           <% if logged_in? %>
           <li class="nav-item"><%= link_to "Users",users_path, :class => "nav-link" %></li>
           <li class="nav-item dropdown">
@@ -18,7 +17,7 @@
               Account<b class="caret"></b>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item"><%= link_to "Profile", current_user %></a>
+              <a class="dropdown-item"><%= link_to "log", current_user %></a>
               <a class="dropdown-item"><%= link_to "Settings", edit_user_path(current_user) %></a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item"><%= link_to "Log out", logout_path, method: :delete %></a>

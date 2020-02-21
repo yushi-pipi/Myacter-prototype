@@ -13,6 +13,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false },
                     unless: :uid?
   has_secure_password validations: false
+  mount_uploader :topimage, PictureUploader
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true, unless: :uid?
 
   # 渡された文字列のハッシュ値を返す
@@ -86,7 +87,6 @@ class User < ApplicationRecord
     uid = auth_hash[:uid]
     name = auth_hash[:info][:name]
     topimage = auth_hash[:info][:image]
-
     # find_or_create_by()は()の中の条件のものが見つければ取得し、なければ新しく作成
     find_or_create_by(provider: provider, uid: uid) do |user|
       user.name = name

@@ -7,10 +7,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(name: 'Example User',
-             email: 'example@railstutorial.org',
+User.create!(name: 'Guest User',
+             email: 'guest@sample.jp',
              password: 'foobar',
              password_confirmation: 'foobar',
+             topimage: open("#{Rails.root}/app/assets/images/pen.png"),
              admin: true,
              activated: true,
              activated_at: Time.zone.now)
@@ -31,22 +32,22 @@ users = User.order(:created_at).take(5)
 
 title = '学習全般'
 category = '学習'
-users.each { |user| user.activities.create!(title: title, category: category) }
+users.each { |user| user.activities.create!(title: title, category: category, picture: open("#{Rails.root}/app/assets/images/pen_green.png")) }
 title = 'プログラミング全般'
 category = 'プログラミング'
-users.each { |user| user.activities.create!(title: title, category: category) }
+users.each { |user| user.activities.create!(title: title, category: category, picture: open("#{Rails.root}/app/assets/images/pc.png")) }
 title = '読書全般'
 category = '読書'
-users.each { |user| user.activities.create!(title: title, category: category) }
+users.each { |user| user.activities.create!(title: title, category: category, picture: open("#{Rails.root}/app/assets/images/book.png")) }
 title = 'スポーツ全般'
 category = 'スポーツ'
-users.each { |user| user.activities.create!(title: title, category: category) }
+users.each { |user| user.activities.create!(title: title, category: category, picture: open("#{Rails.root}/app/assets/images/sports.png")) }
 title = '音楽全般'
 category = '音楽'
-users.each { |user| user.activities.create!(title: title, category: category) }
+users.each { |user| user.activities.create!(title: title, category: category, picture: open("#{Rails.root}/app/assets/images/music.png")) }
 title = '芸術全般'
 category = '芸術'
-users.each { |user| user.activities.create!(title: title, category: category) }
+users.each { |user| user.activities.create!(title: title, category: category, picture: open("#{Rails.root}/app/assets/images/paret.png")) }
 
 # activities = Activity.order(:id).take(25)
 # 3.times do

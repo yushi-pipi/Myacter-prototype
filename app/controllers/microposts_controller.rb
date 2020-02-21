@@ -18,11 +18,15 @@ class MicropostsController < ApplicationController
     @micropost.act_itvl = Time.at(@micropost.finish_at - @micropost.start_at).utc.strftime('%X')
     if @micropost.save
       flash[:success] = '活動を記録しました'
-      redirect_to current_user
+      # redirect_to current_user
     else
       render 'static_pages/home'
     end
-   end
+  end
+
+  def tweet
+    put('tweet_action追加')
+  end
 
   def delete; end
 

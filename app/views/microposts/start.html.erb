@@ -6,14 +6,11 @@
       <div class="field">
         <%= f.text_area :memo, class: 'form-control', placeholder: "アクティビティに関するメモ" %>
       </div>
-      <a><%= @activity.id %></a>
-      <a><%= @micropost.id%></a>
-      <a><%= @micropost.start_at%></a>
-      <a><%= @micropost.finish_at%></a>
-      <a><%= @micropost.memo%></a>
       <%= f.submit "終了", class: "btn btn-primary" %>
+      <% if current_user.uid? %>
       <button type="button" class="btn btn-social btn-twitter" data-toggle="modal" data-target="#post">
       <span class="fa fa-twitter"></span> ツイートする</button>
+      <% end %>
       <div class="container text-center">
         <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog" role="document">

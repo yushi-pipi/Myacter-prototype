@@ -7,7 +7,7 @@ class ActivitiesController < ApplicationController
   def create
     @activity = current_user.activities.build(activity_params)
     if @activity.save
-      flash[:success] = 'Activity created!'
+      flash[:success] = '新しいアクティビティを作成しました!'
       redirect_to root_url
     else
       @feed_items = []
@@ -17,7 +17,7 @@ class ActivitiesController < ApplicationController
 
   def destroy
     @activity.destroy
-    flash[:success] = 'Activity deleted'
+    flash[:success] = 'アクティビティを削除しました'
     redirect_to request.referrer || root_url
   end
 

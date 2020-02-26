@@ -7,8 +7,9 @@ class MicropostsController < ApplicationController
     @micropost = @activity.microposts.create
     @micropost.start_at = Time.now
     @micropost.finish_at = Time.now
+    # 初期入力はハッシュタグにする。テーブルで作成する予定
     @micropost.memo = '#今日の積み立て'
-    @micropost.act_itvl = 0
+    @micropost.act_itvl = Time.now
     @micropost.save
   end
 
@@ -31,17 +32,16 @@ class MicropostsController < ApplicationController
           config.access_token_secret  = current_user.access_secret
         end
         # Twitter投稿
-        tweet = '活動時間:' + @micropost.act_itvl + '/n'
-        tweet += params[:micropost][:memo]
-        client.update(tweet)
+        tweet_time = '活動時間:' + @micropost.act_itvl.strftime('%-Hh%-Mm%-Ss').to_s
+        tweet_memo = params[:micropost][:memo]
+        client.update(tweet_time + "\n" + tweet_memo)
         # redirect_to root_path, notice: 'ツイートしました！'
         flash[:success] = 'ツイートしました！'
-        　else
+        redirect_to current_user
+      else
         flash[:success] = '活動を記録しました'
-
         redirect_to current_user
       end
-
     else
       render 'static_pages/home'
     end

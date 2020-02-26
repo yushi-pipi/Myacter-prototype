@@ -13,9 +13,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @activities = @user.activities.paginate(page: params[:page])
-
-    @user_m = User.includes(activities: :microposts).order('microposts.created_at DESC').find_by_id(params[:id])
-    @microposts = Kaminari.paginate_array(@user_m.activities.map(&:microposts).flatten).page(params[:page]).per(10)
+    @microposts = Kaminari.paginate_array(@user.activities.map(&:microposts).flatten.sort { |a, b| a.created_at <=> b.created_at }.reverse).page(params[:page]).per(10)
   end
 
   def new
@@ -27,7 +25,7 @@ class UsersController < ApplicationController
     if @user.save
       create_act_defolt_table(@user)
       @user.send_activation_email
-      flash[:info] = 'Please check your email to activate your account.'
+      flash[:info] = 'メールを送信しました。確認してください。'
       redirect_to root_url
     else
       render 'new'

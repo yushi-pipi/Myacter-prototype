@@ -26,7 +26,8 @@
     <p>MyActer（My Activityｍeter）は日々の活動を記録します。</p>
     <p>活動記録をフォロワーと共有できます。</p>
     <p>活動記録から自己分析が可能です。</p>
-    <%= link_to "はじめる", signup_path, class: "btn btn-info btn-lg" %>
+    <%= link_to "はじめる", signup_path, class: "btn btn-info btn-md" %>
+    <%=link_to 'ゲストユーザー', guest_path, method: :post, class: "btn btn-info btn-md"%>
     <%= link_to '/auth/twitter', class: "btn btn-social btn-twitter" do %>
     <span class="fa fa-twitter"></span> Twitterアカウントでログイン
     <% end %>

@@ -1,7 +1,7 @@
 <% if current_user.topimage.nil? %>
 <%= link_to gravatar_for(current_user, size: 50), current_user %>
 <% else %>
-<%= image_tag current_user.topimage.url, class:"profile_img",size: 100 %>
+<%= image_tag current_user.topimage, class:"profile_img" ,size: 100%>
 <% end %>
 <h2><%= current_user.name %></h2>
 <span><%= link_to "view my profile", current_user %></span>

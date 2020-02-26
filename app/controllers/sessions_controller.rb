@@ -5,11 +5,12 @@ class SessionsController < ApplicationController
 
   def create
     auth = request.env['omniauth.auth']
+    # Twitterログイン時
     if auth.present?
       user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
       session[:user_id] = user.id
       redirect_to root_url
-    else # 既存パタン
+    else # emai時
       @user = User.find_by(email: params[:session][:email].downcase)
       if @user&.authenticate(params[:session][:password])
         if @user.activated?

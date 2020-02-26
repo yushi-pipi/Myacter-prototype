@@ -1,5 +1,7 @@
-<% if current_user.email.nil? %>
-<%= image_tag current_user.topimage, class:"profile_img" %>
+<% if current_user.topimage? %>
+<%= image_tag current_user.topimage.url, class:"profile_img" ,size: 100%>
+<% elsif current_user.tuimage? %>
+<%= image_tag current_user.tuimage, class:"profile_img" ,size: 100%>
 <% else %>
 <%= link_to gravatar_for(current_user, size: 50), current_user %>
 <% end %>

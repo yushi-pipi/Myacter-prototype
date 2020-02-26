@@ -13,9 +13,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @activities = @user.activities.paginate(page: params[:page])
-
-    @user_m = User.includes(activities: :microposts).order('microposts.created_at DESC').find_by_id(params[:id])
-    @microposts = Kaminari.paginate_array(@user_m.activities.map(&:microposts).flatten).page(params[:page]).per(10)
+    @microposts = Kaminari.paginate_array(@user.activities.map(&:microposts).flatten.sort { |a, b| a.created_at <=> b.created_at }.reverse).page(params[:page]).per(10)
   end
 
   def new
@@ -25,8 +23,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      create_act_defolt_table(@user)
       @user.send_activation_email
-      flash[:info] = 'Please check your email to activate your account.'
+      flash[:info] = 'メールを送信しました。確認してください。'
       redirect_to root_url
     else
       render 'new'
@@ -56,7 +55,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
+    params.require(:user).permit(:name, :email, :password, :topimage,
                                  :password_confirmation)
   end
 
@@ -69,5 +68,26 @@ class UsersController < ApplicationController
   # 管理者かどうか確認
   def admin_user
     redirect_to(root_url) unless current_user.admin?
+  end
+
+  def create_act_defolt_table(user)
+    title = '学習全般'
+    category = '学習'
+    user.activities.create!(title: title, category: category)
+    title = 'プログラミング全般'
+    category = 'プログラミング'
+    user.activities.create!(title: title, category: category)
+    title = '読書全般'
+    category = '読書'
+    user.activities.create!(title: title, category: category)
+    title = 'スポーツ全般'
+    category = 'スポーツ'
+    user.activities.create!(title: title, category: category)
+    title = '音楽全般'
+    category = '音楽'
+    user.activities.create!(title: title, category: category)
+    title = '芸術全般'
+    category = '芸術'
+    user.activities.create!(title: title, category: category)
   end
 end

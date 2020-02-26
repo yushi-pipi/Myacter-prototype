@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(version: 20200218073511) do
     t.string "provider"
     t.string "uid"
     t.string "topimage"
+    t.string "tuimage"
+    t.string "access_token"
+    t.string "access_secret"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

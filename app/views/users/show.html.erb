@@ -3,22 +3,24 @@
   <aside class="col-md-4 activity_create">
     <section class="user_info">
       <h1>
-        <% if @user.email.nil? %>
-        <%= image_tag @user.topimage, class:"profile_img" %>
+        <% if current_user.topimage? %>
+        <%= image_tag current_user.topimage.url, class:"profile_img" ,size: 100%>
+        <% elsif current_user.tuimage? %>
+        <%= image_tag current_user.tuimage, class:"profile_img" ,size: 100%>
         <% else %>
-        <%= gravatar_for @user %>
+        <%= link_to gravatar_for(current_user, size: 50), current_user %>
         <% end %>
       </h1>
       <h2><%= @user.name %></h2>
     </section>
   </aside>
   <div class="col-md-8">
-    
-      <h3>Microposts (<%= @microposts.count %>)</h3>
-      <ol class="microposts">
-        <%= render @microposts %>
-      </ol>
-      <%= paginate @microposts %>
-    
+
+    <h3>Microposts (<%= @microposts.count %>)</h3>
+    <ol class="microposts">
+      <%= render @microposts %>
+    </ol>
+    <%= paginate @microposts %>
+
   </div>
 </div>

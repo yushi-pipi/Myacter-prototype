@@ -27,10 +27,10 @@ gem 'omniauth-twitter'
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
 gem 'twitter'
+gem 'pg',   '0.20.0'
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri
-  gem 'sqlite3', '1.3.13'
 end
 
 group :development do
@@ -52,7 +52,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg',   '0.20.0'
   gem 'rails_12factor'
 end
 

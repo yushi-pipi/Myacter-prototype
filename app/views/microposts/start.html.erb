@@ -11,10 +11,12 @@
       <button type="button" class="btn btn-social btn-twitter" data-toggle="modal" data-target="#post">
       <span class="fa fa-twitter"></span> ツイートする</button>
       <% end %>
+      <% end %>
       <div class="container text-center">
         <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
+              <%= form_for(@micropost) do |f| %>
                 <div class="modal-body">
                   <%= f.text_area :memo, class: "form-control", placeholder: "ツイート内容を入力" %>
                 </div>

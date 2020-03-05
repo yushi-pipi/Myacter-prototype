@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-md-3 box13">
       <dt class="activity"><%= link_to micropost.activity.title, micropost.activity %></dt>
-      <dt class="start_at"><%= micropost.start_at.strftime('%-H:%M')%>~<%= micropost.finish_at.strftime('%-H:%M') %>
-      </dt>
+      <dt class="start_at"><%= micropost.start_at.strftime('%Y-%m-%d')%> </dt>
+      <dt class="start_at"><%= micropost.start_at.strftime('%-H:%M')%>~<%= micropost.finish_at.strftime('%-H:%M') %></dt>
       <dt class="int_at"><%= "#{micropost.act_itvl.strftime('%-Hh%-Mm%-Ss')}" %></dt>
     </div>
     <div class="col-md-5 box14">

@@ -5,18 +5,18 @@ class MicropostsController < ApplicationController
   def start
     @activity = Activity.find(params[:id])
     @micropost = @activity.microposts.create
-    @micropost.start_at = Time.now
-    @micropost.finish_at = Time.now
+    @micropost.start_at = Time.zone.now
+    @micropost.finish_at = Time.zone.now
     # 初期入力はハッシュタグにする。テーブルで作成する予定
     @micropost.memo = '#今日の積み立て'
-    @micropost.act_itvl = Time.now
+    @micropost.act_itvl = Time.zone.now
     @micropost.save
   end
 
   def finish
     @micropost = Micropost.find(params[:id])
     @micropost.update(memo: params[:micropost][:memo])
-    @micropost.finish_at = Time.now
+    @micropost.finish_at = Time.zone.now
     @micropost.act_itvl = Time.at(@micropost.finish_at - @micropost.start_at).utc.strftime('%X')
     if @micropost.save
       if params[:tweet]

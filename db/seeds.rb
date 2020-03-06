@@ -54,3 +54,11 @@ users.each { |user| user.activities.create!(title: title, category: category, pi
 #  memo = 'memo_test'
 #  activities.each { |activity| activity.microposts.create!(memo: memo) }
 # end
+
+# リレーションシップ
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }

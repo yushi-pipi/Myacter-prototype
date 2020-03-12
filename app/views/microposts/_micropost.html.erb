@@ -1,13 +1,19 @@
 <li id="micropost-<%= micropost.id %>">
   <div class="row">
-    <div class="col-md-3 box13">
+    <div class="col-md-3 ">
       <dt class="activity"><%= link_to micropost.activity.title, micropost.activity %></dt>
       <dt class="start_at"><%= micropost.start_at.strftime('%Y-%m-%d')%> </dt>
-      <dt class="start_at"><%= micropost.start_at.strftime('%-H:%M')%>~<%= micropost.finish_at.strftime('%-H:%M') %></dt>
+      <dt class="start_at"><%= micropost.start_at.strftime('%-H:%M')%>~<%= micropost.finish_at.strftime('%-H:%M') %>
+      </dt>
       <dt class="int_at"><%= "#{micropost.act_itvl.strftime('%-Hh%-Mm%-Ss')}" %></dt>
     </div>
-    <div class="col-md-5 box14">
-        <p class="memo"><%= micropost.memo %></p>
+    <div class="col-md-5 ">
+      <p class="memo"><%= micropost.memo %></p>
+    </div>
+    <div class="col-md-3 ">
+      <button
+        class="btn btn-primary "><%= link_to "削除", micropost, method: :delete,class:"link-to",data: { confirm: "You sure?" } %>
+      </button>
     </div>
   </div>
 </li>

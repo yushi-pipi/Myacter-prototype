@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: %i[index edit update destroy]
+  before_action :logged_in_user, only: %i[index edit update destroy following followers]
   before_action :correct_user, only: %i[edit update]
   before_action :admin_user, only: :destroy
+  before_action :create_act_defalt_table, only: :destroy
 
   def index
     # @users = User.paginate(page: params[:page])
@@ -14,6 +15,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @activities = @user.activities.paginate(page: params[:page])
     @microposts = Kaminari.paginate_array(@user.activities.map(&:microposts).flatten.sort { |a, b| a.created_at <=> b.created_at }.reverse).page(params[:page]).per(10)
+    @data = Micropost.joins(:activity).where(user_id: params[:id])
+    @postdata = @data.pluck('activities.title,microposts.start_at,microposts.finish_at')
+    # @postdata = [['yushi', '1994,8,20', '2020,3,11'], ['miki', '1995,11,20', '2020,3,11']]
   end
 
   def new
@@ -52,6 +56,20 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def following
+    @title = 'Following'
+    @user  = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = 'Followers'
+    @user  = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
   private
 
   def user_params
@@ -70,7 +88,7 @@ class UsersController < ApplicationController
     redirect_to(root_url) unless current_user.admin?
   end
 
-  def create_act_defolt_table(user)
+  def create_act_defalt_table
     title = '学習全般'
     category = '学習'
     user.activities.create!(title: title, category: category)

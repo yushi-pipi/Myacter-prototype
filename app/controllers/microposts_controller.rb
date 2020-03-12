@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 class MicropostsController < ApplicationController
-  before_action :correct_activity, only: %i[start destroy]
+  before_action :logged_in_user, only: %i[create destroy]
+  before_action :currect_user,   only: :destroy
+
   def start
     @activity = Activity.find(params[:id])
     @micropost = @activity.microposts.create
+    @micropost.user_id = current_user.id
     @micropost.start_at = Time.zone.now
     @micropost.finish_at = Time.zone.now
-    # 初期入力はハッシュタグにする。テーブルで作成する予定
-    @micropost.memo = '#今日の積み立て'
     @micropost.act_itvl = Time.zone.now
     @micropost.save
   end
@@ -33,7 +34,7 @@ class MicropostsController < ApplicationController
         end
         # Twitter投稿
         tweet_time = '活動時間:' + @micropost.act_itvl.strftime('%-Hh%-Mm%-Ss').to_s
-        tweet_memo = params[:micropost][:memo]
+        tweet_memo = params[:micropost][:tweet]
         client.update(tweet_time + "\n" + tweet_memo)
         # redirect_to root_path, notice: 'ツイートしました！'
         flash[:success] = 'ツイートしました！'
@@ -47,7 +48,11 @@ class MicropostsController < ApplicationController
     end
   end
 
-  def delete; end
+  def destroy
+    @micropost.destroy
+    flash[:success] = 'postを削除しました'
+    redirect_to request.referrer || root_url
+  end
 
   def ebit; end
 
@@ -57,8 +62,8 @@ class MicropostsController < ApplicationController
     params.require(:micropost).permit(:memo)
   end
 
-  def correct_activity
-    # @micropost = correct_activity.microposts.find_by(id: params[:id])
-    # redirect_to root_url if @micropost.nil?
+  def currect_user
+    @micropost = current_user.microposts.find_by(id: params[:id])
+    redirect_to root_url if @micropost.nil?
   end
 end

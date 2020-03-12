@@ -24,10 +24,15 @@ Rails.application.routes.draw do
   get '/activities/:id', to: 'microposts#start'
   patch '/microposts/:id', to: 'microposts#finish'
   post '/guest', to: 'guest_sessions#create'
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: %i[new create edit update]
   resources :activities,          only: %i[create destroy]
+  resources :relationships,       only: [:create, :destroy]
   # resources :microposts,          only: %i[edit destroy]
   resources :microposts, only: %i[edit destroy] do
     collection do

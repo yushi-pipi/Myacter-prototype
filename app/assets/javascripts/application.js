@@ -17,6 +17,8 @@
 //= require popper
 //= require turbolinks
 //= require_tree .
+//= require Chart.bundle
+//= require chartkick
 
 
 $(document).ready(function() {

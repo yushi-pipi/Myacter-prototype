@@ -2,7 +2,7 @@
 
 class ActivitiesController < ApplicationController
   before_action :logged_in_user, only: %i[create destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :currect_user,   only: :destroy
 
   def create
     @activity = current_user.activities.build(activity_params)
@@ -27,7 +27,7 @@ class ActivitiesController < ApplicationController
     params.require(:activity).permit(:title, :category, :picture)
   end
 
-  def correct_user
+  def currect_user
     @activity = current_user.activities.find_by(id: params[:id])
     redirect_to root_url if @activity.nil?
   end

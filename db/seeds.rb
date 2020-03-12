@@ -16,7 +16,7 @@ User.create!(name: 'Guest User',
              activated: true,
              activated_at: Time.zone.now)
 
-99.times do |n|
+10.times do |n|
   name = Faker::Name.name
   email = "example-#{n + 1}@railstutorial.org"
   password = 'password'
@@ -28,7 +28,7 @@ User.create!(name: 'Guest User',
                activated_at: Time.zone.now)
 end
 
-users = User.order(:created_at).take(5)
+users = User.order(:created_at).take(10)
 
 title = '学習全般'
 category = '学習'

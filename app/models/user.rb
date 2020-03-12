@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_many :activities, dependent: :destroy
+  has_many :microposts
   has_many :active_relationships, class_name: 'Relationship',
                                   foreign_key: 'follower_id',
                                   dependent: :destroy
@@ -87,6 +88,14 @@ class User < ApplicationRecord
 
   def feed
     Activity.where('user_id = ?', id)
+  end
+
+  # ユーザーのステータスフィードを返す
+  def feed_with_follow
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
   end
 
   # Twitterでのログイン認証   find_or_create_from_authだとエラーになるバージョンによる違い？

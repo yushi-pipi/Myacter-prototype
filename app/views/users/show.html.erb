@@ -12,15 +12,127 @@
         <% end %>
       </h1>
       <h2><%= @user.name %></h2>
+      <%= render 'shared/stats' %>
+      <%= render 'follow_form' if logged_in? %>
     </section>
   </aside>
   <div class="col-md-8">
-
     <h3>Microposts (<%= @microposts.count %>)</h3>
     <ol class="microposts">
       <%= render @microposts %>
     </ol>
     <%= paginate @microposts %>
+    <%= timeline @postdata,xmin: "2020-03-11-16-00", xmax: "2019-03-11-17-00" %>
+    <div id="hoge" data-hoge-id="<%= @postdata.to_json %>"></div>
+    <input type="date"></input>
+
+    <script type="text/javascript"
+      src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['timeline']}]}">
+    </script>
+    <script type="text/javascript">
+      google.setOnLoadCallback(drawChart);
+
+
+      function drawChart() {
+
+
+        var container = document.getElementById('primiministars');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+        var test = $('#hoge').data('hoge-id');
+        var d1 = new Date('2014,04,01');
+        console.log(d1);
+        console.log(test[0][0]);
+        console.log(test);
+        for (var i = 0, len = test.length; i < len; ++i) {
+          console.log(test[i][0]);
+          var today = new Date(test[i][1]);
+          console.log(today.getFullYear() + "/" +  today.getMonth()+Number(1)+ "/"+ today.getDate())
+          console.log(test[i][2]);
+        }
+
+
+        dataTable.addColumn({
+          type: 'string',
+          id: 'dayid'
+        });
+        dataTable.addColumn({
+          type: 'string',
+          id: 'tooltip'
+        });
+        dataTable.addColumn({
+          type: 'date',
+          id: 'Start'
+        });
+        dataTable.addColumn({
+          type: 'date',
+          id: 'End'
+        });
+        for (var i = 0, len = test.length; i < len; ++i) {
+          var today = new Date(test[i][1])
+          var today_month = today.getMonth()+1
+          dataTable.addRows([
+          [today.getFullYear() + "/" + today_month+ "/"+ today.getDate(),
+          test[i][0], new Date(test[i][1]), new Date(test[i][2])]
+          ]);
+        }
+
+        chart.draw(dataTable);
+      }
+    </script>
+    <div id="primiministars" style="height: 300px;"></div>
+
+
+    <script type="text/javascript">
+      google.charts.load('current', {
+        'packages': ['gauge']
+      });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Memory', 80],
+          ['CPU', 55],
+          ['Network', 68]
+        ]);
+
+        var options = {
+          width: 400,
+          height: 120,
+          redFrom: 90,
+          redTo: 100,
+          yellowFrom: 75,
+          yellowTo: 90,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+
+        setInterval(function () {
+          data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+          chart.draw(data, options);
+        }, 500);
+        setInterval(function () {
+          data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+          chart.draw(data, options);
+        }, 500);
+        setInterval(function () {
+          data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+          chart.draw(data, options);
+        }, 2600);
+      }
+    </script>
+    </head>
+
+    <body>
+      <div id="chart_div" style="width: 400px; height: 120px;"></div>
+    </body>
+
+
 
   </div>
 </div>

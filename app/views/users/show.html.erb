@@ -22,43 +22,38 @@
       <%= render @microposts %>
     </ol>
     <%= paginate @microposts %>
-    <%= timeline @postdata,xmin: "2020-03-11-16-00", xmax: "2019-03-11-17-00" %>
+
+
+
+
+
+
+
+
     <div id="hoge" data-hoge-id="<%= @postdata.to_json %>"></div>
-    <input type="date"></input>
+    <div id="title"><h2>timeline</h2></div>
 
-    <script type="text/javascript"
-      src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['timeline']}]}">
-    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <script type="text/javascript">
-      google.setOnLoadCallback(drawChart);
-
+      google.charts.load("current", {
+        packages: ["timeline"]
+      });
+      google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-
-
-        var container = document.getElementById('primiministars');
+        var container = document.getElementById('example2.1');
         var chart = new google.visualization.Timeline(container);
         var dataTable = new google.visualization.DataTable();
         var test = $('#hoge').data('hoge-id');
-        var d1 = new Date('2014,04,01');
-        console.log(d1);
-        console.log(test[0][0]);
-        console.log(test);
-        for (var i = 0, len = test.length; i < len; ++i) {
-          console.log(test[i][0]);
-          var today = new Date(test[i][1]);
-          console.log(today.getFullYear() + "/" +  today.getMonth()+Number(1)+ "/"+ today.getDate())
-          console.log(test[i][2]);
-        }
-
 
         dataTable.addColumn({
           type: 'string',
-          id: 'dayid'
+          id: 'Term'
         });
         dataTable.addColumn({
           type: 'string',
-          id: 'tooltip'
+          id: 'Name'
         });
         dataTable.addColumn({
           type: 'date',
@@ -68,69 +63,36 @@
           type: 'date',
           id: 'End'
         });
+
         for (var i = 0, len = test.length; i < len; ++i) {
           var today = new Date(test[i][1])
-          var today_month = today.getMonth()+1
+          var today_month = today.getMonth() + 1
+          var start = new Date(test[i][1])
+          var end = new Date(test[i][2])
           dataTable.addRows([
-          [today.getFullYear() + "/" + today_month+ "/"+ today.getDate(),
-          test[i][0], new Date(test[i][1]), new Date(test[i][2])]
+            [today.getFullYear() + "/" + today_month + "/" + today.getDate(),
+              test[i][0],
+              new Date(0,0,0,start.getHours(),start.getMinutes(),start.getSeconds()),
+              new Date(0,0,0,end.getHours(),end.getMinutes(),end.getSeconds())
+            ]
           ]);
         }
 
-        chart.draw(dataTable);
-      }
-    </script>
-    <div id="primiministars" style="height: 300px;"></div>
-
-
-    <script type="text/javascript">
-      google.charts.load('current', {
-        'packages': ['gauge']
-      });
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['Memory', 80],
-          ['CPU', 55],
-          ['Network', 68]
-        ]);
-
         var options = {
-          width: 400,
-          height: 120,
-          redFrom: 90,
-          redTo: 100,
-          yellowFrom: 75,
-          yellowTo: 90,
-          minorTicks: 5
-        };
+          hAxis: {
+            minValue: new Date(0,0,0,0,0,0), // example dates...
+            maxValue: new Date(0,0,0,24,0,0)
+          }
+        }
 
-        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-
-        chart.draw(data, options);
-
-        setInterval(function () {
-          data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function () {
-          data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function () {
-          data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
-          chart.draw(data, options);
-        }, 2600);
+        chart.draw(dataTable,options);
       }
     </script>
-    </head>
 
-    <body>
-      <div id="chart_div" style="width: 400px; height: 120px;"></div>
-    </body>
+    <div id="example2.1" style="height: 200px;"></div>
+
+
+
 
 
 

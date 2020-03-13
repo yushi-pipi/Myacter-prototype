@@ -15,9 +15,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @activities = @user.activities.paginate(page: params[:page])
     @microposts = Kaminari.paginate_array(@user.activities.map(&:microposts).flatten.sort { |a, b| a.created_at <=> b.created_at }.reverse).page(params[:page]).per(10)
-    @data = Micropost.joins(:activity).where(user_id: params[:id])
+    @data = Micropost.joins(:activity).where(activities: { user_id: params[:id] })
     @postdata = @data.pluck('activities.title,microposts.start_at,microposts.finish_at')
-    # @postdata = [['yushi', '1994,8,20', '2020,3,11'], ['miki', '1995,11,20', '2020,3,11']]
   end
 
   def new

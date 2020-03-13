@@ -33,11 +33,9 @@ ActiveRecord::Schema.define(version: 20200305153929) do
     t.datetime "finish_at"
     t.time "act_itvl"
     t.bigint "activity_id"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["activity_id"], name: "index_microposts_on_activity_id"
-    t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -74,5 +72,4 @@ ActiveRecord::Schema.define(version: 20200305153929) do
 
   add_foreign_key "activities", "users"
   add_foreign_key "microposts", "activities"
-  add_foreign_key "microposts", "users"
 end

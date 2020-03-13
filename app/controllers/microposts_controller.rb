@@ -7,7 +7,7 @@ class MicropostsController < ApplicationController
   def start
     @activity = Activity.find(params[:id])
     @micropost = @activity.microposts.create
-    @micropost.user_id = current_user.id
+    # @micropost.user_id = current_user.id
     @micropost.start_at = Time.zone.now
     @micropost.finish_at = Time.zone.now
     @micropost.act_itvl = Time.zone.now
@@ -63,7 +63,7 @@ class MicropostsController < ApplicationController
   end
 
   def currect_user
-    @micropost = current_user.microposts.find_by(id: params[:id])
+    @micropost = Micropost.joins(:activity).find_by(activities: { user_id: current_user.id }, id: params[:id])
     redirect_to root_url if @micropost.nil?
   end
 end
